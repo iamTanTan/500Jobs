@@ -6,6 +6,7 @@ import { NextPage } from "next";
 
 const Home: NextPage = () => {
   const companies = api.company.getAll.useQuery();
+  const { data: sessionData } = useSession();
 
   return (
     <>
@@ -39,7 +40,6 @@ const Home: NextPage = () => {
             </a>
           </div>
         </div>
-        <AuthShowcase />
       </div>
     </>
   );
@@ -72,9 +72,9 @@ const AuthShowcase: React.FC = () => {
 };
 
 const HomeContents = () => {
-  const { data } = useSession();
+  const { data: sessionData } = useSession();
 
-  if (!data)
+  if (!sessionData)
     return (
       <div className="flex grow flex-col items-center justify-center p-4">
         <div className="relative mb-8 text-6xl font-bold">
@@ -87,6 +87,12 @@ const HomeContents = () => {
           An easy way to curate questions from your audience and embed them in
           your OBS.
         </div>
+        <button
+          className="rounded-full bg-black/70 px-10 py-3 font-semibold text-white no-underline transition hover:bg-black/90"
+          onClick={sessionData ? () => void signOut() : () => void signIn()}
+        >
+          {sessionData ? "Sign out" : "Sign in"}
+        </button>
         {/* <Button
           variant="secondary-inverted"
           size="xl"
