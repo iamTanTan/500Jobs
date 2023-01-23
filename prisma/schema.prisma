@@ -8,13 +8,27 @@ datasource db {
 }
 
 model Company {
-  id         String   @id @default(cuid())
-  image      String?
-  name       String
-  jobsLink   String
-  hqLocation String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id           Int           @id @default(autoincrement())
+  image        String?
+  name         String
+  jobsLink     String
+  hqLocation   String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  applications Application[]
+}
+
+model Application {
+  id        String    @id @default(cuid())
+  status    String    @default("Applied")
+  position  String
+  location  String
+  date      DateTime?
+  notes     String?
+  companyId Int
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  company   Company   @relation(fields: [companyId], references: [id])
 }
 
 model Account {
@@ -44,12 +58,13 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String        @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?       @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
+  applications  Application[]
   sessions      Session[]
 }
 
