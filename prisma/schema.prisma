@@ -9,6 +9,7 @@ datasource db {
 
 model Company {
   id           Int           @id @default(autoincrement())
+  rank         Int?
   image        String?
   name         String
   jobsLink     String
@@ -27,8 +28,8 @@ model Application {
   notes     String?
   companyId Int
   userId    String
-  user      User      @relation(fields: [userId], references: [id])
   company   Company   @relation(fields: [companyId], references: [id])
+  user      User      @relation(fields: [userId], references: [id])
 }
 
 model Account {
