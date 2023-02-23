@@ -1,5 +1,6 @@
-import CompanyCard from "./companyCard";
-import { Company } from "@prisma/client";
+import React from 'react';
+import { Company } from '@prisma/client';
+import CompanyCard from './companyCard';
 
 interface CompanyListProps {
   companies: Company[];
@@ -7,8 +8,8 @@ interface CompanyListProps {
 
 const CompanyList: React.FC<CompanyListProps> = ({ companies }) => {
   return (
-    <div className="grid grid-cols-6 gap-4">
-      <div className="col-span-4 col-start-2">
+    <div className='grid grid-cols-6 gap-4'>
+      <div className='col-span-4 col-start-2'>
         {companies.map((c) => (
           <CompanyCard key={c.id} company={c} />
         ))}
