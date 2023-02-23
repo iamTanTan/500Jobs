@@ -1,41 +1,60 @@
-import Head from "next/head";
-import { useSession } from "next-auth/react";
-import { api } from "../utils/api";
-import { NextPage } from "next";
-import { Spinner } from "flowbite-react";
-import CompanyList from "../components/companyList";
-import Footer from "../components/layout/footer";
-import Navbar from "../components/layout/navbar";
+import Head from 'next/head';
+import { useMemo, useState } from 'react';
 
-const Home: NextPage = () => {
-  return (
-    <>
-      <Navbar />
-      <Head>
-        <title>{"Fortune 500 - Tech Jobs"}</title>
-        <meta name="description" content="500 Jobs" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+import { NextPage } from 'next';
+import { Pagination, Spinner } from 'flowbite-react';
+import { api } from '../utils/api';
+import CompanyList from '../components/companyList';
+import Footer from '../components/layout/footer';
+import Navbar from '../components/layout/navbar';
 
-      <HomeContents />
+const Home: NextPage = () => (
+  <>
+    <Navbar />
+    <hr />
+    <Head>
+      <title>{'500Jobs'}</title>
+      <meta name='description' content='500 Jobs' />
+      <link rel='icon' href='/favicon.ico' />
+    </Head>
 
-      <Footer />
-    </>
-  );
-};
+    <HomeContents />
+
+    <Footer />
+  </>
+);
 
 export default Home;
 
 const HomeContents = () => {
   const companies = api.company.getAll.useQuery();
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const currentCompanies = useMemo(() => {
+    if (!companies.data) {
+      return [];
+    }
+
+    return companies.data.slice((currentPage - 1) * 20, (currentPage - 1) * 20 + 20);
+  }, [currentPage, companies]);
 
   if (!companies.data) {
-    return <Spinner aria-label="Extra large spinner example" size="xl" />;
+    return (
+      <div className='flex justify-center'>
+        <Spinner size='xl' />
+      </div>
+    );
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col">
-      <CompanyList companies={companies.data} />
+    <div className='flex min-h-0 flex-1 flex-col'>
+      <CompanyList companies={currentCompanies} />
+      <Pagination
+        className='flex justify-center'
+        currentPage={currentPage}
+        totalPages={25}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
     </div>
   );
 };
