@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { useMemo, useState } from 'react';
-
 import { NextPage } from 'next';
 import { Pagination, Spinner } from 'flowbite-react';
 import { api } from '../utils/api';
@@ -27,23 +26,27 @@ const Home: NextPage = () => (
 export default Home;
 
 const HomeContents = () => {
-  const companies = api.company.getAll.useQuery();
+  const { isLoading, error, data } = api.company.getAll.useQuery();
   const [currentPage, setCurrentPage] = useState(1);
 
   const currentCompanies = useMemo(() => {
-    if (!companies.data) {
+    if (!data) {
       return [];
     }
 
-    return companies.data.slice((currentPage - 1) * 20, (currentPage - 1) * 20 + 20);
-  }, [currentPage, companies]);
+    return data.slice((currentPage - 1) * 20, (currentPage - 1) * 20 + 20);
+  }, [currentPage, data]);
 
-  if (!companies.data) {
+  if (isLoading) {
     return (
       <div className='flex justify-center'>
         <Spinner size='xl' />
       </div>
     );
+  }
+
+  if (error) {
+    return <div>{'An Error has occurred: ' + error.message}</div>;
   }
 
   return (
