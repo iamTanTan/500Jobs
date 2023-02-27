@@ -1,9 +1,12 @@
 import React from 'react';
 import { Button, Navbar } from 'flowbite-react';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 const navbar: React.FC = () => {
   const { data: sessionData } = useSession();
+  const router = useRouter();
+  console.log('path', router.asPath);
 
   return (
     <Navbar fluid={true} rounded={true}>
@@ -13,6 +16,15 @@ const navbar: React.FC = () => {
           500Jobs
         </span>
       </Navbar.Brand>
+      {sessionData && router.asPath != '/application' ? (
+        <div className='ml-auto mr-2'>
+          <Button gradientDuoTone='pinkToOrange' onClick={() => router.push('/application')}>
+            + Application
+          </Button>
+        </div>
+      ) : (
+        <></>
+      )}
       <div className='flex md:order-2'>
         <Button
           gradientDuoTone='pinkToOrange'
