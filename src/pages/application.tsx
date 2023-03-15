@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { NextPage } from 'next';
 import Footer from '../components/layout/footer';
 import Navbar from '../components/layout/navbar';
+import ApplicationForm from '../components/application/applicationForm';
 
 const Application: NextPage = () => (
   <>
@@ -19,8 +20,12 @@ const Application: NextPage = () => (
   </>
 );
 
-export default Application;
-
 const ApplicationContent = () => {
-  return <>Application Content</>;
+  return (
+    <div className='mt-4'>
+      <ApplicationForm />
+    </div>
+  );
 };
+
+export default Application;
