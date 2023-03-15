@@ -15,6 +15,7 @@
     "format": "prettier --write ./src/**/*.{js,jsx,ts,tsx,css,md} --config ./prettier.config.cjs"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.16",
     "@next-auth/prisma-adapter": "^1.0.5",
     "@prisma/client": "^4.8.0",
     "@tanstack/react-query": "^4.20.0",
