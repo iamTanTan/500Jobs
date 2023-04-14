@@ -13,7 +13,7 @@ export const applicationRouter = createTRPCRouter({
         location: z.string(),
         date: z.optional(z.string().datetime()),
         notes: z.optional(z.string()),
-        companyId: z.number(),
+        companyId: z.string(),
       }),
     )
     .mutation(async ({ input, ctx }) => {

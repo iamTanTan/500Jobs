@@ -18,15 +18,6 @@ const ApplicationForm = () => {
   const { data, isLoading, error } = api.company.getAll.useQuery(); // replace with zustand or atom
   const router = useRouter();
 
-  const initialValues: ApplicationForm = {
-    status: 'Applied',
-    position: '',
-    location: '',
-    date: new Date().toISOString().slice(0, 10),
-    notes: '',
-    companyId: '1',
-  };
-
   if (isLoading) {
     return (
       <div className='grid h-full w-full grid-cols-6 gap-4'>
@@ -47,6 +38,15 @@ const ApplicationForm = () => {
     );
   }
 
+  const initialValues: ApplicationForm = {
+    status: 'Applied',
+    position: '',
+    location: '',
+    date: new Date().toISOString().slice(0, 10),
+    notes: '',
+    companyId: data[0].id,
+  };
+
   return (
     <Formik
       initialValues={initialValues}
@@ -54,7 +54,7 @@ const ApplicationForm = () => {
         mutate({
           ...values,
           date: new Date(values.date).toISOString(),
-          companyId: parseInt(values.companyId),
+          companyId: values.companyId,
         });
         setSubmitting(false);
         router.push('/my_apps');
