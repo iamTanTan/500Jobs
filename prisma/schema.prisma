@@ -3,12 +3,12 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model Company {
-  id           Int           @id @default(autoincrement())
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
   rank         Int?
   image        String?
   name         String
@@ -20,21 +20,21 @@ model Company {
 }
 
 model Application {
-  id        String    @id @default(cuid())
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
   status    String    @default("Applied")
   position  String
   location  String
   date      DateTime?
   notes     String?
-  companyId Int
-  userId    String
+  companyId String    @db.ObjectId
+  userId    String    @db.ObjectId
   company   Company   @relation(fields: [companyId], references: [id])
   user      User      @relation(fields: [userId], references: [id])
 }
 
 model Account {
-  id                String  @id @default(cuid())
-  userId            String
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
   type              String
   provider          String
   providerAccountId String
@@ -51,15 +51,15 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(cuid())
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   sessionToken String   @unique
-  userId       String
+  userId       String   @db.ObjectId
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-  id            String        @id @default(cuid())
+  id            String        @id @default(auto())  @map("_id") @db.ObjectId
   name          String?
   email         String?       @unique
   emailVerified DateTime?
@@ -70,7 +70,7 @@ model User {
 }
 
 model VerificationToken {
-  identifier String
+  identifier String   @id @map("_id")
   token      String   @unique
   expires    DateTime
 
