@@ -6,11 +6,12 @@ import { api } from '../utils/api';
 import CompanyList from '../components/companyList';
 import Footer from '../components/layout/footer';
 import Navbar from '../components/layout/navbar';
+import Layout from '../components/layout/layout';
 
 const Home: NextPage = () => (
   <>
     <Navbar />
-    <hr />
+
     <Head>
       <title>{'500Jobs'}</title>
       <meta name='description' content='500 Jobs' />
@@ -22,8 +23,6 @@ const Home: NextPage = () => (
     <Footer />
   </>
 );
-
-export default Home;
 
 const HomeContents = () => {
   const { isLoading, error, data } = api.company.getAll.useQuery();
@@ -50,14 +49,18 @@ const HomeContents = () => {
   }
 
   return (
-    <div className='flex min-h-0 flex-1 flex-col'>
-      <CompanyList companies={currentCompanies} />
-      <Pagination
-        className='flex justify-center'
-        currentPage={currentPage}
-        totalPages={25}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
-    </div>
+    <Layout>
+      <div className='flex min-h-0 flex-1 flex-col'>
+        <CompanyList companies={currentCompanies} />
+        <Pagination
+          className='flex justify-center'
+          currentPage={currentPage}
+          totalPages={25}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      </div>
+    </Layout>
   );
 };
+
+export default Home;
