@@ -7,7 +7,10 @@ interface CompanyCardProps {
 }
 
 const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => (
-  <Card id={company.name} className='my-3'>
+  <Card
+    id={company.name}
+    className='my-3 bg-white shadow-xl dark:hover:bg-slate-700 dark:md:bg-slate-800'
+  >
     <h5 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
       {company.rank ? `${company.rank}. ` : ''} {company.name}
     </h5>
