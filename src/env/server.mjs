@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // @ts-check
 /**
  * This file is included in `/next.config.mjs` which ensures the app isn't built with invalid env vars.
@@ -9,10 +10,7 @@ import { env as clientEnv, formatErrors } from './client.mjs';
 const _serverEnv = serverSchema.safeParse(serverEnv);
 
 if (!_serverEnv.success) {
-  console.error(
-    '❌ Invalid environment variables:\n',
-    ...formatErrors(_serverEnv.error.format())
-  );
+  console.error('❌ Invalid environment variables:\n', ...formatErrors(_serverEnv.error.format()));
   throw new Error('Invalid environment variables');
 }
 
