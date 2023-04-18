@@ -29,4 +29,34 @@ export const applicationRouter = createTRPCRouter({
         },
       });
     }),
+  updateApplication: protectedProcedure
+    .input(
+      z.object({
+        appId: z.string(),
+        status: z.string(),
+        date: z.optional(z.string().datetime()),
+        notes: z.optional(z.string()),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      await ctx.prisma.application.update({
+        where: {
+          id: input.appId,
+        },
+        data: {
+          status: input.status,
+          notes: input.notes,
+          date: input.date,
+        },
+      });
+    }),
+  deleteApplication: protectedProcedure
+    .input(z.object({ appId: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      await ctx.prisma.application.delete({
+        where: {
+          id: input.appId,
+        },
+      });
+    }),
 });
