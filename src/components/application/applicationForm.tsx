@@ -144,7 +144,7 @@ const ApplicationForm = () => {
               })}
             </Field>
 
-            <Button className='mt-6 w-full' gradientDuoTone='pinkToOrange' type='submit'>
+            <Button className='mt-6 w-full' color='dark' type='submit'>
               Create Application
             </Button>
           </Form>
