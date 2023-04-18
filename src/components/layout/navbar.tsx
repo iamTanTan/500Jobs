@@ -6,7 +6,11 @@ const navbar: React.FC = () => {
   const { data: sessionData } = useSession();
 
   return (
-    <Navbar className='bg-primary-50 dark:!bg-midnight' fluid={true} rounded={false}>
+    <Navbar
+      className='border-b bg-primary-50 dark:!border-white dark:!bg-midnight'
+      fluid={true}
+      rounded={false}
+    >
       <Navbar.Brand href='/'>
         <img src='/briefcase.png' className='mr-3 h-6 sm:h-9' alt='Flowbite Logo' />
         <span className='self-center whitespace-nowrap text-xl font-semibold dark:text-white'>
@@ -16,7 +20,8 @@ const navbar: React.FC = () => {
 
       <div className='hidden md:order-2 md:block'>
         <Button
-          gradientDuoTone='pinkToOrange'
+          color='dark'
+          outline={true}
           onClick={sessionData ? () => signOut() : () => signIn()}
         >
           {sessionData ? 'Sign out' : 'Sign in'}
