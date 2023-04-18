@@ -7,17 +7,14 @@ interface CompanyCardProps {
 }
 
 const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => (
-  <Card
-    id={company.name}
-    className='my-3 bg-white shadow-xl dark:hover:bg-slate-700 dark:md:bg-slate-800'
-  >
+  <Card id={company.name} className='my-3 bg-white shadow-xl  dark:md:bg-slate-800'>
     <h5 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
       {company.rank ? `${company.rank}. ` : ''} {company.name}
     </h5>
     <div className='whitespace-pre font-normal text-gray-700 dark:text-gray-400'>
       {company.jobsLink}
     </div>
-    <Button gradientDuoTone='pinkToOrange' href={company.jobsLink}>
+    <Button color='dark' href={company.jobsLink}>
       Go to site
       <svg
         className='ml-2 -mr-1 h-4 w-4'
