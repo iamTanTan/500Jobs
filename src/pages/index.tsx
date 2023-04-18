@@ -38,9 +38,13 @@ const HomeContents = () => {
 
   if (isLoading) {
     return (
-      <div className='flex justify-center'>
-        <Spinner size='xl' />
-      </div>
+      <Layout>
+        <div className='flex min-h-screen justify-center'>
+          <div className='flex items-center '>
+            <Spinner size='xl' />
+          </div>
+        </div>
+      </Layout>
     );
   }
 
