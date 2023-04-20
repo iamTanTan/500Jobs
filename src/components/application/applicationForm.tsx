@@ -60,8 +60,8 @@ const ApplicationForm = () => {
         router.push('/my_apps');
       }}
     >
-      <div className='grid grid-cols-6 gap-4'>
-        <div className='col-span-4 col-start-2 w-full'>
+      <div className='m-2 grid grid-cols-6 gap-4'>
+        <div className='col-span-6 w-full md:col-span-6 md:col-start-2'>
           <Form className='mb-4 rounded px-8 pt-6 pb-8 shadow-md dark:bg-midnight_light'>
             <div className='mb-2 block'>
               <label className='mb-2 block text-sm font-bold' htmlFor='status'>
