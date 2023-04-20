@@ -52,10 +52,10 @@ const AppUpdateForm: React.FC<AppUpdateFormProps> = ({ appId, status, date, note
         }}
       >
         <Form>
-          <div className='flex justify-around'>
+          <div className='md:flex md:justify-around'>
             <div className='flex w-full flex-col'>
-              <div className='mb-2 block'>
-                <label className='mb-2 block text-sm font-bold' htmlFor='status'>
+              <div className='block'>
+                <label className='my-2 block text-sm font-bold' htmlFor='status'>
                   Application Status
                 </label>
               </div>
@@ -73,9 +73,9 @@ const AppUpdateForm: React.FC<AppUpdateFormProps> = ({ appId, status, date, note
                 <option>Rejected</option>
               </Field>
             </div>
-            <div className='ml-2 flex w-auto flex-col'>
-              <div className='mb-2 block'>
-                <label className='mb-2 block text-sm font-bold ' htmlFor='Applied Date'>
+            <div className='flex w-auto flex-col md:ml-2'>
+              <div className='block '>
+                <label className='my-2 block text-sm font-bold ' htmlFor='Applied Date'>
                   Date
                 </label>
               </div>
@@ -87,8 +87,8 @@ const AppUpdateForm: React.FC<AppUpdateFormProps> = ({ appId, status, date, note
               ></Field>
             </div>
           </div>
-          <div className='mb-2 block'>
-            <label className='mb-2 block text-sm font-bold ' htmlFor='Notes'>
+          <div className='block'>
+            <label className='my-2 block text-sm font-bold ' htmlFor='Notes'>
               Notes
             </label>
           </div>
