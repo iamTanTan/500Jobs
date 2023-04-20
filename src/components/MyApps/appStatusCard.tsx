@@ -21,11 +21,11 @@ const AppStatusCard: React.FC<MyAppsProps> = ({ app }) => {
         className='mt-3  bg-white shadow-xl  dark:text-white dark:hover:bg-slate-700 dark:md:bg-slate-800'
         onClick={() => setShowUpdateFrom(!showUpdateForm)}
       >
-        <div className='flex flex-col pl-2 '>
-          <div className='rounded-lg border p-4 dark:border-midnight'>
-            <div className='text-lg font-medium '>{app.position}</div>
-            <div className='flex justify-between'>
-              <div className='flex'>
+        <div className='flex flex-col'>
+          <div className='rounded-md'>
+            <div className='text-lg font-bold '>{app.position}</div>
+            <div className='md:flex md:justify-between'>
+              <div className='flex pt-2'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
@@ -42,7 +42,7 @@ const AppStatusCard: React.FC<MyAppsProps> = ({ app }) => {
                 </svg>
                 {isLoading ? '...' : companyName}
               </div>
-              <div className='flex'>
+              <div className='flex pt-2'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
@@ -67,35 +67,9 @@ const AppStatusCard: React.FC<MyAppsProps> = ({ app }) => {
             </div>
           </div>
         </div>
-        <div className='flex justify-between'>
-          <div className='flex flex-col'>
-            <div className='flex justify-center'>Applied</div>
-            <div className='flex justify-center'></div>
-            <div className='flex justify-center'>
-              {app.status === 'Applied' ? app.date?.toDateString() : ''}
-            </div>
-          </div>
-          <div className='flex flex-col '>
-            <div className='flex justify-center'>Screen</div>
-            <div className='flex justify-center'></div>
-            <div className='flex justify-center'>
-              {app.status === 'Screen' ? app.date?.toDateString() : ''}
-            </div>
-          </div>
-          <div className='flex flex-col '>
-            <div className='flex justify-center'>Interview</div>
-            <div className='flex justify-center'></div>
-            <div className='flex justify-center'>
-              {app.status === 'Interview' ? app.date?.toDateString() : ''}
-            </div>
-          </div>
-          <div className='flex flex-col '>
-            <div className='flex justify-center'>Offer</div>
-            <div className='flex justify-center'></div>
-            <div className='flex justify-center'>
-              {app.status === 'Offer' ? app.date?.toDateString() : ''}
-            </div>
-          </div>
+        <div className='flex flex-col'>
+          <div>Status: {app.status}</div>
+          <div>Date: {app.date ? app.date?.toLocaleDateString() : ''}</div>
         </div>
       </Card>
       {showUpdateForm ? (
